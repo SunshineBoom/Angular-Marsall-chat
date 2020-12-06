@@ -1,0 +1,23 @@
+<div class="banner" *ngIf="loaded">
+  <div>
+    <a routerLink="/">
+      <i class="fa fa-angle-left btn-back" aria-hidden="true"></i>
+    </a>
+  </div>
+  <div class="user">
+    <img src="{{ messagesData.photo }}" class="icon-photo" alt="user-pic">
+  </div>
+  <div class="user-content">
+    <h4 class="user-name">{{ messagesData.full_name }}</h4>
+    <span class="chat-item-active" *ngIf="messagesData.is_online">Online</span>
+  </div>
+</div>
+<section *ngIf="loaded">
+  <div class="messages-items" #messagesItems [scrollTop]="messagesItems.scrollHeight">
+    <div *ngFor="let message of messagesData.data.items; let i = index" class="message message-{{message.message_direction}}">
+      <p class="text-message" *ngIf="message.message_type === 0">{{ message.message_content }}</p>
+      <img src="{{message.message_content}}" *ngIf="message.message_type === 1" class="img">
+      <span class="message-datetime">{{ message.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+    </div>
+  </div>
+</section>

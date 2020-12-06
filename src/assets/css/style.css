@@ -1,0 +1,123 @@
+body {
+    background: #f0f0f0;
+    font-family: 'Gilroy', serif;
+}
+.main-display {
+    background: #FFFFFF;
+    width: 414px;
+    margin: 0 auto;
+}
+.logotype {
+    padding-top: 248px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+.header {
+    text-align: center;
+    letter-spacing: 0.5px;
+    color: #223263
+}
+.paragraph {
+    font-family: 'Poppins', serif;
+    text-align: center;
+    letter-spacing: 0.5px;
+    margin-top: 8px;
+
+    color: #9098B1;
+}
+.form-group {
+    margin: 8px 35.5px 0;
+    position: relative;
+}
+.form-label {
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.form-label:before {
+    position: absolute;
+    top: 14px;
+    left: 18px;
+    color: #a2a2a2;
+    font-size: 24px;
+}
+.label-name:before {
+    content: "\f2c0";
+}
+.label-email:before {
+    content: "\f003";
+}
+.label-password:before {
+    content: "\f023";
+}
+.form-control {
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 100%;
+    padding: 16px 16px 13px 50px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+    color: #9098B1;
+
+}
+.form-control:focus {
+    outline-color: #a92b54;
+}
+.button-sign-in{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 16px;
+    background: #77062A;;
+    box-shadow: 0 10px 30px
+        rgba(169, 47, 75, 0.24);
+    border-radius: 5px;
+    width: 100%;
+    color: #FFFFFF;
+    border-color: #77062A;;
+    align-self: center;
+    justify-content: center;
+    height: 57px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 25px;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+.actions {
+    text-align: center;
+    letter-spacing: 0.5px;
+    padding: 24px 0 240px;
+
+    color: #9098B1;
+}
+.actions p{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+.sign-in {
+   color: #77062a;
+}
+.forgot {
+    font-family: 'Poppins';
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 150%;
+    text-align: center;
+    letter-spacing: 0.5px;
+    color: #77062A;
+}

@@ -1,0 +1,53 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="form-header">
+    <h1 class="header">Let's Get Started</h1>
+    <p class="paragraph">Create on new account</p>
+  </div>
+  <div class="form-group">
+    <label class="form-label label-name">
+      <input type="text" class="form-control" placeholder="Your Name" formControlName="fullName"  [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" >
+      <span *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
+        <span *ngIf="f.fullName.errors.required">Name is required</span>
+      </span>
+    </label>
+  </div>
+  <div class="form-group">
+    <label class="form-label label-email">
+      <input type="email" class="form-control" placeholder="Your email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+      <span *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <span *ngIf="f.email.errors.required">Email is required</span>
+      </span>
+    </label>
+  </div>
+  <div class="form-group">
+    <label class="form-label label-password">
+      <input type="password" class="form-control" placeholder="Password"
+             [ngClass]="{ 'is-invalid': submitted && f.password.errors }"  formControlName="password" />
+      <span *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <span *ngIf="f.password.errors.required">Password is required</span>
+        <span *ngIf="f.password.errors.minlength">Password must be at least 6 characters</span>
+      </span>
+    </label>
+  </div>
+  <div class="form-group">
+    <label class="form-label label-password">
+      <input type="password" class="form-control" placeholder="Password Again"
+             [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"  formControlName="confirmPassword" />
+      <span *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+        <span *ngIf="f.confirmPassword.errors.required">Password Again is required</span>
+        <span *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</span>
+      </span>
+    </label>
+  </div>
+  <div class="form-group">
+    <button class="button-sign-in button">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+      Sign in
+    </button>
+  </div>
+  <div class="actions">
+    <p>
+      have a account? <a routerLink="/login" class="sign-in">Sign in</a>
+    </p>
+  </div>
+</form>

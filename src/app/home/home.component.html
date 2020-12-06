@@ -1,0 +1,31 @@
+<header>
+  <div class="header-chat">
+    Marsall Chat
+  </div>
+</header>
+<section>
+  <div class="topnav">
+    <a class="top-nav" href="#all">All</a>
+    <a class="top-nav active" href="#">Important</a>
+    <a class="top-nav" href="#">Unread</a>
+  </div>
+  <div class="chat-items-wrapper">
+    <div *ngFor="let chat of chats; let i = index" class="chat-item">
+      <a routerLink="/chat/{{chat.chat_sender_id}}" class="chat-link">
+        <div class="chat-item__image">
+          <img src="{{chat.photo}}" class="photo" alt="chat-img">
+          <span class="online" *ngIf="chat.is_online"></span>
+        </div>
+        <div class="chat-item__content">
+          <h4 class="chat-item__title">{{chat.full_name}} {{chat.messageType}} <i class="fa fa-star favorite" *ngIf="chat.is_favorite"></i> </h4>
+          <span class="chat-item__preview unread" *ngIf="chat.message_type === 0">{{chat.message_content}}</span>
+          <span class="chat-item__preview unread" *ngIf="chat.message_type === 1"><i>(photo)</i></span>
+        </div>
+        <div class="chat-item__data">
+          <span class="time">{{chat.last_time}}</span>
+          <span class="unread-count" *ngIf="chat.unread > 0">{{chat.unread}}</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
