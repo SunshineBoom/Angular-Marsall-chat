@@ -376,8 +376,10 @@ input.form-control.is-invalid {
 .user-content {
   padding-top: 36px;
   padding-left: 19px;
-  padding-right: 120px;
 
+}
+.user-content a {
+  text-decoration: none;
 }
 
 .user-name {
@@ -401,7 +403,7 @@ input.form-control.is-invalid {
   margin: 36px 19px 0 27px;
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 238px);
+  height: calc(100vh - 238px);
   overflow-y: auto;
 }
 
@@ -432,6 +434,7 @@ input.form-control.is-invalid {
   color: #FFFFFF;
   padding: 21px 33px;
   margin: 0;
+  min-width: 70px;
 }
 
 .message-out .text-message {

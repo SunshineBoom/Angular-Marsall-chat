@@ -34,13 +34,6 @@ export class AuthenticationService {
       }));
   }
 
-  restorePassword(email) {
-    return this.http.post<any>(`${environment.apiUrl}/users/restore-password`, { email })
-      .pipe(map( response => {
-      this.alertService.success(response.message);
-    }));
-  }
-
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);

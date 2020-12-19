@@ -18,7 +18,7 @@ export class ChatComponent implements OnInit {
   countNewMessages = 0;
   loaded = false;
   needScroll = true;
-  idsForViewed: number[];
+  idsForViewed = [];
 
   sendMessageForm: FormGroup;
 
@@ -66,7 +66,7 @@ export class ChatComponent implements OnInit {
     this.chatService.getChat(this.chatID, this.currentPage, this.itemsPerPage, this.countNewMessages)
       .pipe(first())
       .subscribe((messageData: any) => {
-        for (const message of messageData.data.items){
+        for (const message of messageData.data.items) {
           if (message.messageDirection !== 'in' && message.isViewed === 0) {
             this.idsForViewed.push(message.id);
           }
@@ -79,6 +79,7 @@ export class ChatComponent implements OnInit {
           }
         }
         this.loaded = true;
+        this.setMessageViewed();
       });
   }
 
@@ -94,13 +95,13 @@ export class ChatComponent implements OnInit {
     messageContent: string,
     messageType: string
   ): Message {
-  const messageToSend = new Message();
-  messageToSend.messageContent = messageContent;
-  messageToSend.messageFrom = this.currentUser.id;
-  messageToSend.messageTo = this.chatID;
-  messageToSend.messageType = messageType;
-  return messageToSend;
-}
+    const messageToSend = new Message();
+    messageToSend.messageContent = messageContent;
+    messageToSend.messageFrom = this.currentUser.id;
+    messageToSend.messageTo = this.chatID;
+    messageToSend.messageType = messageType;
+    return messageToSend;
+  }
 
   onSubmit(): void {
     const message = this.createNewMessage(this.sendMessageForm.controls.content.value, 'text');

@@ -10,7 +10,7 @@ import {element} from 'protractor';
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent implements OnInit {
   currentUser: User;
-  chats: any;
+  chats: Chat[];
   chatsType = 'all';
   currentPage = 1;
   itemsPerPage = 20;
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
 
         if (this.chats) {
           for (let index = 0; index < this.chats.length; index++) {
-            if (this.chats[index].schat_sender_id === chatID) {
+            if (this.chats[index].chatSenderId === chatID) {
               this.issetChat = true;
               this.issetChaIndex = index;
               break;
@@ -59,11 +59,12 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  updateChatAndMoveUp(index): void {
-    const neededChat = this.chats.splice(index, 1);
+  updateChatAndMoveUp(index: number): void {
+    const neededChat = this.chats.splice(index, 1)[0];
     this.chats.unshift(neededChat);
     if (this.isNeedUpdateUnreadCount) {
       this.chats[0].unread++;
+      this.chats[0].messageContent = this.chats[0].messageContent.substring(0, 40);
       this.isNeedUpdateUnreadCount = false;
     }
   }
@@ -77,13 +78,6 @@ export class HomeComponent implements OnInit {
       });
   }
 
-
-  changeChatsType(type: string): void {
-    this.chatsType = type;
-    this.currentPage = 1;
-    this.countNewMessage = 0;
-    this.loadAllChats();
-  }
 
   private loadAllChats(): void {
     this.chatService.getAll(this.chatsType, this.currentPage, this.itemsPerPage, this.countNewMessage)
@@ -100,5 +94,21 @@ export class HomeComponent implements OnInit {
           this.canLoadMore = false;
         }
       });
+  }
+
+  changeChatsType(type: string): void {
+    this.chatsType = type;
+    this.currentPage = 1;
+    this.chats = [];
+    this.countNewMessage = 0;
+    this.loadAllChats();
+  }
+
+  onScroll(event): void {
+    const leftSpace = event.target.scrollHeight - event.target.scrollTop;
+    if (leftSpace < 1200 && this.canLoadMore) {
+      this.currentPage++;
+      this.loadAllChats();
+    }
   }
 }

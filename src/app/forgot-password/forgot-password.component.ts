@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { AlertService, AuthenticationService } from '@/_services';
+import {AlertService, AuthenticationService, UserService} from '@/_services';
 import {first} from 'rxjs/operators';
 import {error} from '@angular/compiler/src/util';
 
@@ -21,7 +21,8 @@ export class ForgotPasswordComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private userService: UserService
   ) {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
@@ -48,7 +49,8 @@ export class ForgotPasswordComponent implements OnInit {
 
     this.loading = true;
 
-    this.authenticationService.restorePassword(this.f.emall.value)
+    // отправляю запрос на востановленгия пароля
+    this.userService.restorePasswordRequest(this.f.emall.value)
       .pipe(first())
       .subscribe(
         data => {

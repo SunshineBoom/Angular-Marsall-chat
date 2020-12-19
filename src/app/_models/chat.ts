@@ -6,4 +6,6 @@ export class Chat {
   messageType: number;
   messageContent: string;
   ifFavorite: boolean;
+  unread: number;
+  isOnline: number;
 }
