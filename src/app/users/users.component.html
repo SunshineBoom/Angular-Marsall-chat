@@ -1,0 +1,23 @@
+<div class="banner">
+  <a routerLink="/">
+    <i class="fa fa-angle-left btn-back" aria-hidden="true"></i>
+  </a>
+</div>
+<div class="user-search form-group">
+  <label class="label">
+    <input type="text" (keyup)="searchUsers($event)" class="user-search-input" #userSearchQuery/>
+    <span class="search-label">Search</span>
+  </label>
+</div>
+<div class="users-list">
+  <ng-container *ngFor="let user of users">
+    <a class="user-item" routerLink="/chat/{{user.id}}">
+      <div class="user-photo">
+        <img src="{{user.photo}}" class="photo" alt="user-photo"/>
+      </div>
+      <div class="name-search">
+        <span>{{user.fullName}}</span>
+      </div>
+    </a>
+  </ng-container>
+</div>
