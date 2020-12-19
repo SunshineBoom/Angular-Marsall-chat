@@ -1,13 +1,18 @@
-<header>
-  <div class="header-chat">
-    Marsall Chat
+<header class="header-wrapper">
+  <div class="header-chat">Marsall Chat</div>
+  <div>
+    <a  class="chat-settings-button" routerLink="/user/{{currentUser.id}}">
+      <i class="fa fa-cog"></i>
+    </a>
   </div>
 </header>
-<section>
+<section class="chat-section">
   <div class="topnav">
-    <a class="top-nav" href="#all">All</a>
-    <a class="top-nav active" href="#">Important</a>
-    <a class="top-nav" href="#">Unread</a>
+    <a class="top-nav" [ngClass]="{'active': chatsType === 'all'}" (click)="changeChatsType('all')">All</a>
+    <a class="top-nav" [ngClass]="{'active': chatsType === 'unread'}" (click)="changeChatsType('unread')">Unread</a>
+    <a routerLink="/users" class="create-message">
+      <i class="fa fa-pencil"></i>
+    </a>
   </div>
   <div class="chat-items-wrapper">
     <div *ngFor="let chat of chats; let i = index" class="chat-item">

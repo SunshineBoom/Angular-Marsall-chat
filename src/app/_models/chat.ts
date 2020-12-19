@@ -3,6 +3,7 @@ export class Chat {
   fullName: string;
   chatSenderId: string;
   lastTime: string;
+  messageType: number;
   messageContent: string;
   ifFavorite: boolean;
 }

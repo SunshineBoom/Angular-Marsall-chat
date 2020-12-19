@@ -5,7 +5,7 @@ import { first } from 'rxjs/operators';
 
 import { AlertService, UserService, AuthenticationService } from '@/_services';
 
-// импортируем кастомный валидатор, который будет валидировать совпадение полей password и confirmPassword
+// импортирую кастомный валидатор, который будет валидировать совпадение полей password и confirmPassword
 import { MustMatch } from '@/_helpers';
 
 @Component({ templateUrl: 'register.component.html' })
@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
     private userService: UserService,
     private alertService: AlertService
   ) {
-    // перенаправляем на главную страницу если пользователь залогинен
+    // перенаправляю на главную страницу если пользователь залогинен
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
     }
@@ -38,16 +38,16 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  // удобный getter для простого доступа к полям формы
+
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
     this.submitted = true;
 
-    // удаляем все оповещания из сервиса оповещаний
+    // удаляю все оповещания из сервиса оповещаний
     this.alertService.clear();
 
-    // перестаём входить, если форма невалидна
+    // перестаю входить, если форма невалидна
     if (this.registerForm.invalid) {
       return;
     }

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 
-import { Chat } from '@/_models';
+import {Chat, Photo} from '@/_models';
 import { environment } from '../../environments/environment';
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,20 @@ export class ChatService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(currentPage: number, itemsPerPage: number, countNewMessage: number) {
-    return this.http.get( `${environment.apiUrl}/chat?page=${currentPage}&limit=${itemsPerPage}&newMessagesOffset=${countNewMessage}`);
+  getAll(chatsType: string, currentPage: number, itemsPerPage: number, countNewMessage: number): Observable<any> {
+    return this.http.get( `${environment.apiUrl}/chat?Type=${chatsType}page=${currentPage}&limit=${itemsPerPage}&newMessagesOffset=${countNewMessage}`);
   }
 
-  getChat(chatId: string, currentPage: number, itemsPerPage: number, countNewMessages: number) {
+  getChat(chatId: string, currentPage: number, itemsPerPage: number, countNewMessages: number): Observable<any>  {
     return this.http.get(`${environment.apiUrl}/chat/${chatId}?page=${currentPage}&limit=${itemsPerPage}&newMessagesOffset=${countNewMessages}`);
+  }
+  getChatPreview(chatId: string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/chat/${chatId}?preview=true`);
+  }
+  uploadImage(imageForm: FormData): Observable<any>{
+    return  this.http.post( `${environment.apiUrl}/chat/upload-image`, imageForm);
+  }
+  setViewed(ids: number[]): Observable<any> {
+    return  this.http.post(`${environment.apiUrl}/chat/set-viewed`, ids);
   }
 }

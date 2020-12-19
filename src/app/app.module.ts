@@ -17,6 +17,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ChangePasswordComponent } from '@/change-password';
 import { ChatComponent } from './chat/chat.component';
 import { InformationComponent } from './information/information.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { InformationComponent } from './information/information.component';
     ForgotPasswordComponent,
     ChangePasswordComponent,
     ChatComponent,
-    InformationComponent
+    InformationComponent,
+    UsersComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

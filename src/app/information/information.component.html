@@ -1,1 +1,55 @@
-<p>information works!</p>
+<div class="banner">
+  <a routerLink="{{returnUrl}}">
+    <i class="fa fa-angle-left btn-back" aria-hidden="true"></i>
+  </a>
+</div>
+<div class="chat-item has-new-messages">
+  <div class="chat-item__image">
+    <img src="{{ informationUser.photo }}" class="photo" alt="user-photo" (click)="isCurrentUser && imageUploadInput.click()">
+    <input #imageUploadInput type="file" accept="image/png, image/jpeg, image/jpg" style="display: none"  (change)="imageUpload($event)" />
+  </div>
+  <div class="chat-item__content">
+    <h4 class="setting-name">{{ informationUser.fullName}}</h4>
+  </div>
+</div>
+<div *ngIf="informationUser">
+  <div class="setting-container">
+    <h3 class="acc">Account</h3>
+    <span class="inform" (click)="getEditForm('fullName')">{{ informationUser.fullName}}</span>
+    <div class="form-group edit-user-data" *ngIf="(formIsActive && f.attribute.value === 'fullName') && isCurrentUser">
+      <input type="text" name="{{informationForm.controls.attribute.value}}" value="{{informationForm.controls.value.value}}" autofocus (focusout)="submitEditForm($event)" />
+    </div>
+    <p class="edit" *ngIf="isCurrentUser" (click)="getEditForm('fullName')">Tap to change name</p>
+  </div>
+  <hr class="line">
+</div>
+<div *ngIf="informationUser">
+  <div class="setting-container">
+    <span class="inform"  (click)="getEditForm('email')">{{ informationUser.email }}</span>
+    <div class="form-group edit-user-data" *ngIf="(formIsActive && f.attribute.value === 'email') && isCurrentUser">
+      <input type="text" name="{{informationForm.controls.attribute.value}}" value="{{informationForm.controls.value.value}}" autofocus (focusout)="submitEditForm($event)" />
+    </div>
+    <p class="edit" (click)="getEditForm('email')">Email</p>
+  </div>
+  <hr class="line">
+</div>
+<div *ngIf="informationUser">
+  <div class="setting-container">
+    <span class="inform" (click)="getEditForm('bio')">{{ informationUser.bio }}</span>
+    <div class="form-group edit-user-data" *ngIf="(formIsActive && f.attribute.value === 'bio') && isCurrentUser">
+      <textarea name="{{informationForm.controls.attribute.value}}" autofocus (focusout)="submitEditForm($event)">{{informationForm.controls.value.value}}</textarea>
+    </div>
+    <p class="edit" (click)="getEditForm('bio')">Bio</p>
+  </div>
+  <hr class="line">
+</div>
+<div class="setting-container" *ngIf="isCurrentUser">
+  <h3 class="acc">Settings</h3>
+  <div class="exit">
+    <a (click)="logout()">
+        <i class="fa fa-sign-out logoexit" aria-hidden="true"></i>
+        <span class="inform logout">Exit</span>
+    </a>
+  </div>
+</div>
+

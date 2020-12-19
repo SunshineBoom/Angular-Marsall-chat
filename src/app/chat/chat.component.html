@@ -5,19 +5,37 @@
     </a>
   </div>
   <div class="user">
-    <img src="{{ messagesData.photo }}" class="icon-photo" alt="user-pic">
+    <a [routerLink]="['/user/' + messagesData.userID ]">
+      <img src="{{ messagesData.photo }}" class="icon-photo" alt="user-pic">
+    </a>
   </div>
   <div class="user-content">
-    <h4 class="user-name">{{ messagesData.full_name }}</h4>
-    <span class="chat-item-active" *ngIf="messagesData.is_online">Online</span>
+    <a [routerLink]="['/user/' + messagesData.userID ]">
+      <h4 class="user-name">{{ messagesData.full_name }}</h4>
+      <span class="chat-item-active" *ngIf="messagesData.is_online">Online</span>
+    </a>
   </div>
 </div>
 <section *ngIf="loaded">
-  <div class="messages-items" #messagesItems [scrollTop]="messagesItems.scrollHeight">
-    <div *ngFor="let message of messagesData.data.items; let i = index" class="message message-{{message.message_direction}}">
-      <p class="text-message" *ngIf="message.message_type === 0">{{ message.message_content }}</p>
-      <img src="{{message.message_content}}" *ngIf="message.message_type === 1" class="img">
-      <span class="message-datetime">{{ message.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+  <div class="messages-items" #messagesItems [scrollTop]="this.needScroll && messagesItems.scrollHeight" (scroll)="onScroll($event)">
+    <div *ngFor="let message of messagesData.data.items; let i = index" class="message message-{{message.messageDirection}}">
+      <p class="text-message" *ngIf="message.messageType === 0">{{ message.messageContent }}</p>
+      <img src="{{message.messageContent}}" *ngIf="message.messageType === 1" class="img" alt="image message" />
+      <span class="message-datetime">{{ message.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
     </div>
   </div>
+  <form class="send" [formGroup]="sendMessageForm" (ngSubmit)="onSubmit()">
+    <div class="send-message">
+      <input class="send-text" placeholder="Type your message" formControlName="content">
+      <div class="add">
+        <button type="submit" class="action-button" title="Add photo" (click)="imageUploadInput.click()">
+          <i class="fa fa-plus"></i>
+          <input type="file" style="display: none" id="image-upload" (change)="imageUpload($event)" #imageUploadInput accept="image/png, image/jpeg" />
+        </button>
+        <button type="submit" class="action-button" title="Send message">
+          <i class="fa fa-paper-plane chat-form-action" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </form>
 </section>

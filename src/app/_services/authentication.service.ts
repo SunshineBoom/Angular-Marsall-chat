@@ -20,6 +20,9 @@ export class AuthenticationService {
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
   }
+  updateUserData(user: User): void {
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
 
   login(email, password) {
     return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { email, password })
@@ -39,7 +42,6 @@ export class AuthenticationService {
   }
 
   logout() {
-    // убираем текущего пользователя из localStorage, и ставим значение свойства currentUserSubject null
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
